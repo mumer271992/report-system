@@ -9,7 +9,7 @@ import Loader from '../Loader/Loader';
 const AddPlant = () => {
   const globalState = useContext(store);
   const { dispatch } = globalState;
-  const [plant, setPlant] = useState({});
+  const [plant, setPlant] = useState({ name: '' });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -18,6 +18,10 @@ const AddPlant = () => {
   const inputChangeHandler = e => {
     setErrors({});
     setPlant({ name: e.target.value });
+    const validateFormFields = validateForm({ name: e.target.value }, ['name']);
+    if (!validateFormFields.isValid) {
+      setErrors(validateFormFields.errors);
+    }
   };
 
   const notify = msg => {
