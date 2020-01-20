@@ -6,6 +6,7 @@ import { store } from '../../store/store';
 import AxiosHelper from '../../helpers/AxiosHelper';
 import { validateForm } from '../../helpers/utility';
 import Graaph from '../Graph/Graph';
+import Loader from '../Loader/Loader';
 
 const Report = () => {
   const globalState = useContext(store);
@@ -18,6 +19,7 @@ const Report = () => {
   const [reportData, setReportData] = useState([]);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
   const changeHandler = ({ target }) => {
     const { name, value } = target;
@@ -46,11 +48,14 @@ const Report = () => {
         setLoading(false);
         if (resp && resp.length) {
           setReportData(resp);
+          setMessage('');
+        } else {
+          setMessage('No data found.');
         }
       })
-      .catch(error => {
-        console.log(error);
+      .catch(() => {
         setLoading(false);
+        setMessage('No data found.');
       });
   };
 
@@ -118,11 +123,12 @@ const Report = () => {
             </button>
           </form>
         </div>
+        {loading && <Loader />}
       </div>
       {!loading && reportData && reportData.length > 0 ? (
         <Graaph type={dataPoint.type} data={reportData} />
       ) : (
-        <div>No data found</div>
+        <div>{message}</div>
       )}
     </React.Fragment>
   );

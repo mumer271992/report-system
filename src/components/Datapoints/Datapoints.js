@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react';
 import { store } from '../../store/store';
 import AxiosHelper from '../../helpers/AxiosHelper';
 import { validateForm } from '../../helpers/utility';
+import Loader from '../Loader/Loader';
 
 const Datapoints = () => {
   const globalState = useContext(store);
@@ -14,6 +15,8 @@ const Datapoints = () => {
   const [dataPoint, setDataPoint] = useState(initialDataPoint);
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const changeHandler = ({ target }) => {
     const { name, value } = target;
@@ -41,14 +44,19 @@ const Datapoints = () => {
       setErrors(validateFields.errors);
       return;
     }
+    setLoading(true);
+    setIsError(false);
     AxiosHelper.post('/datapoints/update', dataPoint)
       .then(resp => {
+        setLoading(false);
         if (resp && resp.ok) {
           showMessage('Data points updated from monitoring service.');
         }
       })
-      .catch(error => {
-        showMessage(JSON.stringify(error));
+      .catch(() => {
+        setLoading(false);
+        setIsError(true);
+        showMessage('Something went wrong!');
       });
   };
 
@@ -125,9 +133,14 @@ const Datapoints = () => {
             </button>
           </form>
           {message && message !== '' && (
-            <div className="alert alert-info mt-2">{message}</div>
+            <div
+              className={`alert alert-${isError ? 'danger' : 'success'} mt-2`}
+            >
+              {message}
+            </div>
           )}
         </div>
+        {loading && <Loader />}
       </div>
     </React.Fragment>
   );

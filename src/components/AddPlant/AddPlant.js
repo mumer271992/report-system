@@ -4,17 +4,27 @@ import React, { useState, useContext } from 'react';
 import { store } from '../../store/store';
 import AxiosHelper from '../../helpers/AxiosHelper';
 import { validateForm } from '../../helpers/utility';
+import Loader from '../Loader/Loader';
 
 const AddPlant = () => {
   const globalState = useContext(store);
   const { dispatch } = globalState;
   const [plant, setPlant] = useState({});
   const [errors, setErrors] = useState({});
-  const [successMessage, setSuccessMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [isError, setIsError] = useState(false);
 
   const inputChangeHandler = e => {
     setErrors({});
     setPlant({ name: e.target.value });
+  };
+
+  const notify = msg => {
+    setMessage(msg);
+    setTimeout(() => {
+      setMessage('');
+    }, 1000);
   };
 
   const submitHandler = e => {
@@ -24,19 +34,24 @@ const AddPlant = () => {
       setErrors(validateFormFields.errors);
       return;
     }
+    setLoading(true);
+    setIsError(false);
     AxiosHelper.post('/plants', plant)
       .then(resp => {
+        setLoading(false);
         if (resp && resp.uid) {
           dispatch({
             type: 'ADD_PLANT',
             plant: resp
           });
           setPlant({ name: '' });
-          setSuccessMessage('Plant added');
+          notify('Plant added');
         }
       })
-      .catch(error => {
-        console.log(error);
+      .catch(() => {
+        setLoading(false);
+        setIsError(true);
+        notify('Sometthing wennt wrong!');
       });
   };
 
@@ -68,13 +83,17 @@ const AddPlant = () => {
           >
             Add Plant
           </button>
-          {successMessage && (
-            <div data-test="success-alert" className="alert alert-success mt-1">
-              {successMessage}
+          {message && (
+            <div
+              data-test="success-alert"
+              className={`alert alert-${isError ? 'danger' : 'success'} mt-1`}
+            >
+              {message}
             </div>
           )}
         </form>
       </div>
+      {loading && <Loader />}
     </div>
   );
 };

@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="text-center">3megawatt challenge</h1>
+      <h1 className="text-center mt-5 mb-5">3megawatt challenge</h1>
       <div className="container">
         <ul className="nav nav-tabs">
           <li className="nav-item">
