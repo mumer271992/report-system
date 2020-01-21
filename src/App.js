@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import './App.css';
 import AddPlant from './components/AddPlant/AddPlant';
