@@ -1,3 +1,13 @@
+/*
+  TEST PLAN
+
+  ✔ Component renders properly
+  ✔ All form fields are rendered
+  ✔ Should display error message on submitting empty form 
+  ✔ Should display error message on submitting empty form 
+  ✔ Should call axios post method on clicking submit
+*/
+
 import React from 'react';
 import axios from 'axios';
 import { mount } from 'enzyme';
@@ -42,7 +52,7 @@ describe('renders add plant component without crashing', () => {
     expect(errorAlertWrapper.length).toEqual(1);
   });
 
-  it('should display success message on submit form', () => {
+  it('should submit form on submit button', () => {
     const plantName = 'Test plant';
     wrapper
       .find('[data-test="plant-name"]')

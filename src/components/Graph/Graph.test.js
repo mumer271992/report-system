@@ -1,5 +1,11 @@
+/*
+  TEST PLAN
+
+  ✔ Component renders properly
+*/
+
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import Graph from './Graph';
 import { StateProvider } from '../../store/store';
@@ -49,20 +55,4 @@ describe('renders graph component without crashing', () => {
   it('should renders properly', () => {
     expect(wrapper.length).toEqual(1);
   });
-
-  // it('is form fields rendered', () => {
-  //   const inputWrapper = wrapper.find('[data-test="select_plant"]').at(0);
-  //   const fromDateWrapper = wrapper.find('[data-test="from_date"]').at(0);
-  //   const toDateWrapper = wrapper.find('[data-test="from_date"]').at(0);
-  //   const buttonWrapper = wrapper.find('[data-test="update_btn"]');
-  //   expect(inputWrapper.length).toEqual(1);
-  //   expect(fromDateWrapper.length).toEqual(1);
-  //   expect(toDateWrapper.length).toEqual(1);
-  //   expect(buttonWrapper.length).toEqual(1);
-  // });
-
-  // it('is button disabled initially', () => {
-  //   const buttonWrapper = wrapper.find('[data-test="update_btn"]');
-  //   expect(buttonWrapper.props().disabled).toBe(true);
-  // });
 });

@@ -10,7 +10,9 @@ const Datapoints = () => {
   const globalState = useContext(store);
   const { plants } = globalState.state;
   const initialDataPoint = {
-    plant_id: ''
+    plant_id: '',
+    from_date: '',
+    to_date: ''
   };
   const [dataPoint, setDataPoint] = useState(initialDataPoint);
   const [errors, setErrors] = useState({});

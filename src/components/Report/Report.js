@@ -13,7 +13,8 @@ const Report = () => {
   const { plants } = globalState.state;
   const initialDataPoint = {
     plant_id: '',
-    type: 'energy'
+    type: 'energy',
+    date: ''
   };
   const [dataPoint, setDataPoint] = useState(initialDataPoint);
   const [reportData, setReportData] = useState([]);
@@ -69,6 +70,7 @@ const Report = () => {
               <label>Select Plant</label>
               <select
                 name="plant_id"
+                data-test="plant_id"
                 className="form-control"
                 value={dataPoint.plant_id}
                 onChange={changeHandler}
@@ -89,6 +91,7 @@ const Report = () => {
               <label>Select type</label>
               <select
                 name="type"
+                data-test="type"
                 className="form-control"
                 value={dataPoint.type}
                 onChange={changeHandler}
@@ -102,6 +105,7 @@ const Report = () => {
               <input
                 type="date"
                 name="date"
+                data-test="date"
                 className="form-control"
                 placeholder="Select from date"
                 value={dataPoint.date}
@@ -111,6 +115,7 @@ const Report = () => {
             </div>
             <button
               type="submit"
+              data-test="report_btn"
               className="btn btn-primary"
               disabled={
                 !dataPoint ||

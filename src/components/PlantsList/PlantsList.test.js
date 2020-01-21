@@ -1,3 +1,11 @@
+/*
+  TEST PLAN
+
+  ✔ Component should renders properly
+  ✔ Componnent should render all list items
+  ✔ Clicking on delete should trigger dispatch metthod of mocked state provider 
+*/
+
 import React from 'react';
 import axios from 'axios';
 import { mount } from 'enzyme';
