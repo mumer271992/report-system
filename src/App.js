@@ -7,9 +7,9 @@ import Datapoints from './components/Datapoints/Datapoints';
 import Report from './components/Report/Report';
 import AxiosHelper from './helpers/AxiosHelper';
 import { store } from './store/store';
+import Tabs from './components/Tabs/Tabs';
 
 function App() {
-  const [currentTab, setCurrentTab] = useState('plants');
   const globalState = useContext(store);
   const { dispatch } = globalState;
 
@@ -30,42 +30,18 @@ function App() {
     <div className="App">
       <h1 className="text-center mt-5 mb-5">3megawatt challenge</h1>
       <div className="container">
-        <ul className="nav nav-tabs">
-          <li className="nav-item">
-            <div
-              className={`nav-link ${currentTab === 'plants' ? 'active' : ''}`}
-              onClick={() => setCurrentTab('plants')}
-            >
-              Plant
-            </div>
-          </li>
-          <li className="nav-item">
-            <div
-              className={`nav-link ${
-                currentTab === 'datapoints' ? 'active' : ''
-              }`}
-              onClick={() => setCurrentTab('datapoints')}
-            >
-              Datapoints
-            </div>
-          </li>
-          <li className="nav-item">
-            <div
-              className={`nav-link ${currentTab === 'report' ? 'active' : ''}`}
-              onClick={() => setCurrentTab('report')}
-            >
-              Report
-            </div>
-          </li>
-        </ul>
-        {currentTab === 'plants' && (
-          <>
+        <Tabs defaultTab="plants">
+          <div label="plants" uniqueKey="plants">
             <AddPlant />
             <PlantsList />
-          </>
-        )}
-        {currentTab === 'datapoints' && <Datapoints />}
-        {currentTab === 'report' && <Report />}
+          </div>
+          <div label="datapoints" uniqueKey="datapoints">
+            <Datapoints />
+          </div>
+          <div label="report" uniqueKey="report">
+            <Report />
+          </div>
+        </Tabs>
       </div>
     </div>
   );
