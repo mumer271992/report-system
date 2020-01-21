@@ -1,0 +1,13 @@
+# base image
+FROM node:12.2.0-alpine
+
+# set working directory
+WORKDIR /client
+
+# install and cache app dependencies
+COPY . .
+RUN npm install yarn -g --silent
+RUN yarn install
+
+# start app
+CMD ["yarn", "start"]
