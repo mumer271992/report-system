@@ -37,14 +37,14 @@ const PlantsList = () => {
       <div className="card-header">Plants List</div>
       <div className="card-body">
         <div className="d-flex justify-content-between align-items-center p-2">
-          <div style={{ width: '40%' }}>
+          <div style={{ flex: 2 }}>
             {' '}
             <b>UID</b>
           </div>
-          <div style={{ width: '40%' }}>
+          <div style={{ flex: 2 }}>
             <b>Name</b>
           </div>
-          <div style={{ width: '20%' }}>
+          <div style={{ flex: 1 }}>
             <b>Actions</b>
           </div>
         </div>
@@ -55,9 +55,9 @@ const PlantsList = () => {
               key={item.uid}
               className="d-flex justify-content-between align-items-center p-2 border-top"
             >
-              <div style={{ width: '40%' }}>{item.uid}</div>
-              <div style={{ width: '40%' }}>{item.name}</div>
-              <div style={{ width: '20%' }}>
+              <div style={{ flex: 2 }}>{item.uid}</div>
+              <div style={{ flex: 2 }}>{item.name}</div>
+              <div style={{ flex: 1 }}>
                 <button
                   data-test="delete-plant-btn"
                   className="btn btn-danger"
