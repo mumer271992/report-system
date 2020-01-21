@@ -34,7 +34,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test a",
     "eject": "react-scripts eject",
-    "serve": "node server.js"
+    "serve": "node --max_old_space_size=2560 server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
