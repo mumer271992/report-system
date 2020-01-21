@@ -6,9 +6,13 @@ const Tabs = ({ children, defaultTab }) => {
 
   return (
     <div className="tabs">
-      <ul className="nav nav-tabs">
+      <ul className="nav nav-tabs" data-test="tabs">
         {children.map(child => (
-          <li className="nav-item" key={child.props.uniqueKey}>
+          <li
+            className="nav-item"
+            key={child.props.uniqueKey}
+            data-test="tab-items"
+          >
             <div
               className={`nav-link ${
                 currentTab === child.props.uniqueKey ? 'active' : ''

@@ -2,6 +2,9 @@
   TEST PLAN
 
   ✔ Component renders properly
+  ✔ All tabs should render properly
+  ✔ Default tab should be active on start
+  ✔ Default tab should be changed on clicking other tab
 */
 
 import React from 'react';
