@@ -3,7 +3,7 @@
 import React, { useContext, useState } from 'react';
 import { store } from '../../store/store';
 
-import AxiosHelper from '../../helpers/AxiosHelper';
+import api from '../../api/index';
 import { validateForm } from '../../helpers/utility';
 import Graaph from '../Graph/Graph';
 import Loader from '../Loader/Loader';
@@ -41,10 +41,11 @@ const Report = () => {
       return;
     }
     setLoading(true);
-    AxiosHelper.post('/datapoints/report', {
-      plant_id: dataPoint.plant_id,
-      date: dataPoint.date
-    })
+    api.datapoints
+      .report({
+        plant_id: dataPoint.plant_id,
+        date: dataPoint.date
+      })
       .then(resp => {
         setLoading(false);
         if (resp && resp.length) {

@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import React, { useState, useContext } from 'react';
 import { store } from '../../store/store';
-import AxiosHelper from '../../helpers/AxiosHelper';
+import api from '../../api/index';
 import { validateForm } from '../../helpers/utility';
 import Loader from '../Loader/Loader';
 
@@ -40,7 +40,8 @@ const AddPlant = () => {
     }
     setLoading(true);
     setIsError(false);
-    AxiosHelper.post('/plants', plant)
+    api.plants
+      .add(plant)
       .then(resp => {
         setLoading(false);
         if (resp && resp.uid) {

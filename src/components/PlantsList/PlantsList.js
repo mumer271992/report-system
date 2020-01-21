@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { store } from '../../store/store';
-import AxiosHelper from '../../helpers/AxiosHelper';
+import api from '../../api/index';
 
 const PlantsList = () => {
   const globalState = useContext(store);
@@ -10,7 +10,8 @@ const PlantsList = () => {
   } = globalState;
 
   const deleteHandler = uid => {
-    AxiosHelper.delete(`/plants/${uid}`)
+    api.plants
+      .delete(uid)
       .then(() => {
         dispatch({ type: 'REMOVE_PLANT', plant_uuid: uid });
       })
@@ -18,19 +19,18 @@ const PlantsList = () => {
   };
 
   useEffect(() => {
-    if (plants && plants.length === 0) {
-      AxiosHelper.get('/plants')
-        .then(resp => {
-          if (resp && resp.results) {
-            dispatch({
-              type: 'Add_PLANTS_LIST',
-              plants: resp.results
-            });
-          }
-        })
-        .catch(error => console.log(error));
-    }
-  }, [dispatch, plants]);
+    api.plants
+      .get()
+      .then(resp => {
+        if (resp && resp.results && resp.results.length) {
+          dispatch({
+            type: 'Add_PLANTS_LIST',
+            plants: resp.results
+          });
+        }
+      })
+      .catch(error => console.log(error));
+  }, [dispatch]);
 
   return (
     <div className="card mt-1">

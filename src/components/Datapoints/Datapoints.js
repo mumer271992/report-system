@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import React, { useContext, useState } from 'react';
 import { store } from '../../store/store';
-import AxiosHelper from '../../helpers/AxiosHelper';
+import api from '../../api/index';
 import { validateForm } from '../../helpers/utility';
 import Loader from '../Loader/Loader';
 
@@ -48,7 +48,8 @@ const Datapoints = () => {
     }
     setLoading(true);
     setIsError(false);
-    AxiosHelper.post('/datapoints/update', dataPoint)
+    api.datapoints
+      .update(dataPoint)
       .then(resp => {
         setLoading(false);
         if (resp && resp.ok) {
