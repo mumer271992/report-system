@@ -11,4 +11,4 @@ RUN yarn install
 RUN yarn build
 
 # start app
-CMD ["yarn", "serve"]
+CMD ["yarn", "start"]

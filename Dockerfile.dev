@@ -10,4 +10,4 @@ RUN npm install yarn -g --silent
 RUN yarn install
 
 # start app
-CMD ["yarn", "start"]
+CMD ["yarn", "start:dev"]
