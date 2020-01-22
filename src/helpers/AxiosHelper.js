@@ -2,6 +2,7 @@
 import axios from 'axios';
 
 const AxiosHelper = {
+  // FIXME: This api basic url should get from env varibales
   base_url: 'http://localhost:5001',
 
   getList: function(endpoint, params) {
